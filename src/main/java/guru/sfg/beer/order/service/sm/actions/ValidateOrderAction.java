@@ -32,12 +32,14 @@ public class ValidateOrderAction implements Action<BeerOrderStatusEnum, BeerOrde
         Optional<String> beerOrderIdOpt = Optional.ofNullable((String) context.getMessage().getHeaders().get(BeerOrderManagerImpl.ORDER_ID_HEADER));
         if(beerOrderIdOpt.isPresent()) {
             String beerOrderId = beerOrderIdOpt.get();
-            BeerOrder beerOrder = beerOrderRepository.findOneById(UUID.fromString(beerOrderId));
-            jmsTemplate.convertAndSend(JmsConfig.VALIDATE_ORDER_QUEUE, ValidateOrderRequest.builder()
+            Optional<BeerOrder> beerOrderOptional = beerOrderRepository.findById(UUID.fromString(beerOrderId));
+            beerOrderOptional.ifPresentOrElse(beerOrder -> {
+                jmsTemplate.convertAndSend(JmsConfig.VALIDATE_ORDER_QUEUE, ValidateOrderRequest.builder()
                         .beerOrder(beerOrderMapper.beerOrderToDto(beerOrder))
                         .build());
 
-            log.debug("Sent Validation request to queue for order id " + beerOrderId);
+                log.debug("Sent Validation request to queue for order id " + beerOrderId);
+            }, () -> log.debug("Order Not Found. Id: " + beerOrderId));
         } else {
             log.debug("No beer order id was sent.");
         }
