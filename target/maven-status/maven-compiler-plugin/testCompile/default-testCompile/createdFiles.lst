@@ -1,1 +1,5 @@
+guru\sfg\beer\order\service\BeerOrderManagerImplIT.class
+guru\sfg\beer\order\service\BeerOrderManagerImplIT$RestTemplateBuildProvider.class
+guru\sfg\beer\order\service\testcomponents\BeerOrderValidationListener.class
+guru\sfg\beer\order\service\testcomponents\BeerOrderAllocationListener.class
 guru\sfg\beer\order\service\BeerOrderServiceApplicationTests.class
