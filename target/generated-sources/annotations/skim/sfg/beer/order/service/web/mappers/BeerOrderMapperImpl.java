@@ -19,7 +19,7 @@ import skim.sfg.brewery.model.BeerOrderLineDto;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-29T15:13:00-0500",
+    date = "2023-07-26T23:06:41-0500",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.18 (Oracle Corporation)"
 )
 @Component
